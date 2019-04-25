@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+    <!-- 通过context:component-scan标签，使用Spring扫描指定包下的所有类，让标注Spring注解的类生效。
+ 若扫描到@Controller等这些注解的类，则自动把这些类注册为Bean组件 -->
+    <context:component-scan base-package="cn.book.controller"/>
+    <!-- 通过mvc:annotation-driven让SpringMVC支持@Controller、@RequestMapping等注解。-->
+    <mvc:annotation-driven/>
+    <!--配置SpringMVC的内部资源视图解析器  返回 逻辑视图名叫：/WEB-INF/jsp/welcome.jsp-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--在逻辑视图名前面加上前缀：/WEB-INF/jsp/-->
+        <property name="prefix" value="/WEB-INF/jsp"/>
+        <!--在逻辑视图名前面加上后缀：.jsp-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--处理静态资源的引用问题 css/js/image-->
+    <mvc:resources mapping="/statics/**" location="/statics/" />
+</beans>
